@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+The home screen keeps the portrait splash and prompt interaction in the index route, with shared visual tokens and animation rules in `src/styles.css` for a cohesive single-screen experience.

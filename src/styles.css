@@ -70,6 +70,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Arial Narrow", "Aptos Narrow", sans-serif;
 }
 
 :root {
@@ -106,6 +107,11 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --splash-ink: oklch(0.97 0.012 240);
+  --splash-muted: oklch(0.78 0.035 240);
+  --splash-cyan: oklch(0.82 0.16 210);
+  --splash-violet: oklch(0.72 0.2 315);
+  --splash-glass: oklch(0.14 0.04 255 / 78%);
 }
 
 .dark {
@@ -141,6 +147,225 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --splash-ink: oklch(0.97 0.012 240);
+  --splash-muted: oklch(0.78 0.035 240);
+  --splash-cyan: oklch(0.82 0.16 210);
+  --splash-violet: oklch(0.72 0.2 315);
+  --splash-glass: oklch(0.14 0.04 255 / 78%);
+}
+
+.splash-screen {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(1.4rem, 5vw, 3.6rem) clamp(1.25rem, 6vw, 5.5rem) clamp(1.6rem, 4vh, 3rem);
+  background: oklch(0.08 0.04 254);
+  color: var(--splash-ink);
+}
+
+.splash-art,
+.splash-shade {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-art {
+  object-fit: cover;
+  object-position: center 51%;
+  animation: splash-art-arrive 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.splash-shade {
+  background: linear-gradient(
+    180deg,
+    oklch(0.07 0.045 255 / 62%) 0%,
+    oklch(0.07 0.045 255 / 17%) 24%,
+    transparent 43%,
+    transparent 67%,
+    oklch(0.07 0.045 255 / 25%) 79%,
+    oklch(0.07 0.045 255 / 87%) 100%
+  );
+}
+
+.splash-topline,
+.splash-bottom {
+  display: flex;
+  width: min(100%, 68rem);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.splash-topline {
+  animation: splash-rise 0.75s 0.12s both;
+}
+
+.splash-mark {
+  display: grid;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid oklch(0.93 0.025 230 / 52%);
+  border-radius: 50%;
+  color: var(--splash-ink);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.splash-coordinate,
+.splash-eyebrow,
+.splash-note {
+  color: var(--splash-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.splash-intro {
+  position: absolute;
+  top: clamp(7rem, 16vh, 10rem);
+  left: 50%;
+  width: min(90vw, 42rem);
+  transform: translateX(-50%);
+  text-align: center;
+  animation: splash-rise 0.85s 0.2s both;
+}
+
+.splash-eyebrow {
+  margin: 0 0 0.85rem;
+}
+
+.splash-intro h1 {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 8vw, 5.7rem);
+  font-weight: 800;
+  line-height: 0.92;
+}
+
+.splash-intro h1 span {
+  margin-top: 0.52rem;
+  color: var(--splash-ink);
+  font-size: 0.55em;
+  font-weight: 600;
+}
+
+.splash-intro h1 i {
+  color: var(--splash-cyan);
+  font-style: normal;
+}
+
+.splash-bottom {
+  align-items: flex-end;
+  animation: splash-rise 0.85s 0.35s both;
+}
+
+.splash-note {
+  margin: 0 0 0.7rem;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.splash-cta {
+  min-height: 3.5rem;
+  border: 1px solid oklch(0.88 0.12 215 / 65%);
+  border-radius: 999px;
+  padding: 0.45rem 1.25rem;
+  background: var(--splash-glass);
+  color: var(--splash-ink);
+  box-shadow: 0 0 2.2rem oklch(0.67 0.18 220 / 22%), inset 0 0 1.4rem oklch(0.82 0.14 215 / 8%);
+  backdrop-filter: blur(18px);
+  animation: splash-glow 3.2s 1.4s ease-in-out infinite;
+}
+
+.splash-cta:hover {
+  border-color: var(--splash-cyan);
+  background: oklch(0.18 0.065 236 / 88%);
+}
+
+.splash-cta > svg {
+  color: var(--splash-cyan);
+}
+
+.splash-cta-divider {
+  width: 1px;
+  height: 1.2rem;
+  margin-inline: 0.15rem;
+  background: oklch(0.87 0.05 230 / 40%);
+}
+
+.splash-cta-name {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+}
+
+.prompt-dialog {
+  gap: 1.1rem;
+  border-color: oklch(0.78 0.1 220 / 30%);
+  border-radius: 0.75rem;
+  background: var(--splash-glass);
+  color: var(--splash-ink);
+  backdrop-filter: blur(24px);
+}
+
+.prompt-dialog [data-slot="dialog-description"] {
+  color: var(--splash-muted);
+}
+
+.prompt-input {
+  min-height: 9rem;
+  resize: vertical;
+  border-color: oklch(0.78 0.1 220 / 28%);
+  background: oklch(0.08 0.04 254 / 68%);
+  color: var(--splash-ink);
+}
+
+.prompt-copy {
+  justify-self: end;
+  border-radius: 999px;
+}
+
+@keyframes splash-art-arrive {
+  from { opacity: 0.55; transform: scale(1.035); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes splash-rise {
+  from { opacity: 0; translate: 0 0.9rem; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes splash-glow {
+  0%, 100% { box-shadow: 0 0 1.5rem oklch(0.67 0.18 220 / 18%), inset 0 0 1.4rem oklch(0.82 0.14 215 / 8%); }
+  50% { box-shadow: 0 0 2.5rem oklch(0.67 0.18 220 / 38%), inset 0 0 1.4rem oklch(0.82 0.14 215 / 12%); }
+}
+
+@media (max-width: 640px) {
+  .splash-art { object-position: center 48%; }
+  .splash-intro { top: 7.5rem; }
+  .splash-bottom { flex-direction: column; align-items: center; gap: 0.9rem; }
+  .splash-note { margin: 0; }
+  .splash-cta { min-height: 3.3rem; padding-inline: 1rem; }
+  .splash-cta-name { font-size: 0.61rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer base {
