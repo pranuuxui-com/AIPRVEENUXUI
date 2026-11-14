@@ -77,4 +77,4 @@ const titles = [
   "Developer handoff", "Frontend build", "Backend & APIs", "AI features", "Automated testing",
   "Security review", "Deployment", "Analytics", "Learning loop", "Optimization",
 ];
-export const phases: Phase[] = titles.map((title, i) => ({ n: i + 1, title, agent: agents[Math.floor(i / 5)] }));
+export const phases: Phase[] = titles.map((title, i) => ({ n: i + 1, title, agent: agents[Math.floor(i / 5)] ?? "AI Agent" }));
